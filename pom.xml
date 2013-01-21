@@ -18,6 +18,35 @@
 		</dependency>    
     </dependencies> 
 
+    <profiles>
+        <profile>
+            <id>copylib</id>
+		    <activation>
+		      <file>
+		        <missing>${basedir}/lib/json-schema-validator-1.4.6.jar</missing>
+		      </file>
+		    </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>copy-dependencies</goal>
+                                    </goals>
+                                    <configuration>
+                                        <outputDirectory>${basedir}/lib</outputDirectory>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
 	
 	<build>
 	    <sourceDirectory>src</sourceDirectory>
@@ -40,31 +69,6 @@
      <url>http://download.eclipse.org/releases/juno</url>
    </repository>
   </repositories>
-
-    <profiles>
-        <profile>
-            <id>copylib</id>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                            <executions>
-                                <execution>
-                                    <phase>package</phase>
-                                    <goals>
-                                        <goal>copy-dependencies</goal>
-                                    </goals>
-                                    <configuration>
-                                        <outputDirectory>${basedir}/lib</outputDirectory>
-                                    </configuration>
-                                </execution>
-                            </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
 
 	<licenses>
