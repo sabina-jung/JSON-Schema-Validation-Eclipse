@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="sj.jsonSchemaValidationBuilder"
+         name="Json Schema Validation Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="sj.jsonschemavalidation.builder.JsonSchemaValidationBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="sj.jsonSchemaValidationNature"
+         name="Json Schema Validation Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="sj.jsonschemavalidation.builder.JsonSchemaValidationNature">
+         </run>
+      </runtime>
+      <builder
+            id="sj.jsonSchemaValidationBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="sj.jsonschemavalidation.contribution1">
+         <action
+               label="Add/Remove Json Validation Nature"
+               class="sj.jsonschemavalidation.builder.ToggleNatureAction"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               enablesFor="+"
+               id="sj.jsonschemavalidation.addRemoveNatureAction">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         id="sj.jsonschemavalidation.jsonProblem"
+         name="JSON Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+
+</plugin>
